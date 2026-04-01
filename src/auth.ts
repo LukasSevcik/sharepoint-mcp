@@ -8,8 +8,8 @@ import fs from "fs";
 import path from "path";
 import os from "os";
 
-// Azure PowerShell — Microsoft first-party public client, pre-consented in every tenant
-const CLIENT_ID = "1950a258-227b-4e31-a9cf-717495945fc2";
+// PnP Management Shell — public client designed for SharePoint delegated access
+const CLIENT_ID = "31359c7f-bd7e-475c-86db-fdb8c937548e";
 const AUTHORITY = "https://login.microsoftonline.com/organizations";
 const CACHE_DIR = path.join(os.homedir(), ".sharepoint-mcp");
 const CACHE_FILE = path.join(CACHE_DIR, "token-cache.json");
@@ -84,6 +84,7 @@ export async function getAccessToken(siteUrl: string): Promise<string> {
 
   const res = await pca.acquireTokenInteractive({
     scopes: [scope],
+    prompt: "select_account",
     openBrowser: async (url: string) => {
       await open(url);
     },
