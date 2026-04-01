@@ -8,12 +8,11 @@ import fs from "fs";
 import path from "path";
 import os from "os";
 
-// PnP Management Shell — well-known public client, no app registration needed
-const CLIENT_ID = "31359c7f-bd7e-475c-86db-fdb8c937548e";
+// Azure PowerShell — Microsoft first-party public client, pre-consented in every tenant
+const CLIENT_ID = "1950a258-227b-4e31-a9cf-717495945fc2";
 const AUTHORITY = "https://login.microsoftonline.com/organizations";
 const CACHE_DIR = path.join(os.homedir(), ".sharepoint-mcp");
 const CACHE_FILE = path.join(CACHE_DIR, "token-cache.json");
-const REDIRECT_PORT = 3001;
 
 // ---------------------------------------------------------------------------
 // File-based token cache (persists logins between server restarts)
@@ -88,7 +87,6 @@ export async function getAccessToken(siteUrl: string): Promise<string> {
     openBrowser: async (url: string) => {
       await open(url);
     },
-    loopbackClient: { port: REDIRECT_PORT } as never,
     successTemplate: `
       <html><body style="font-family:sans-serif;padding:40px;text-align:center">
         <h2>✓ Prihlásenie úspešné!</h2>
