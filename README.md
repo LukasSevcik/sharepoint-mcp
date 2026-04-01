@@ -88,23 +88,49 @@ SITE_URL=https://contoso.sharepoint.com/sites/mysite
 
 ---
 
-## Konfigurácia MCP v Claude Code
+## Konfigurácia MCP v Claude Desktop
 
-Pridaj do `~/.claude/claude_desktop_config.json` (alebo do firemného `claude_desktop_config.json`):
+Pridaj do `claude_desktop_config.json` (zvyčajne `%APPDATA%\Claude\claude_desktop_config.json` alebo na Windows `%LOCALAPPDATA%\Packages\Claude_...\LocalCache\Roaming\Claude\claude_desktop_config.json`):
+
+### Možnosť 1 — skompilovaný build (odporúčané)
+
+Najprv sprav build projektu:
+
+```bash
+npm run build
+```
+
+Potom pridaj do konfigurácie (uprav cestu podľa svojho umiestnenia projektu):
+
+```json
+{
+  "mcpServers": {
+    "sharepoint": {
+      "command": "node",
+      "args": ["C:/Users/Lukas/Documents/AI Projects/sharepoint-mcp/dist/index.js"]
+    }
+  }
+}
+```
+
+Po každej zmene kódu treba znovu spustiť `npm run build`.
+
+### Možnosť 2 — priamo TypeScript cez tsx (len pre vývoj)
 
 ```json
 {
   "mcpServers": {
     "sharepoint": {
       "command": "npx",
-      "args": ["tsx", "src/index.ts"],
-      "cwd": "C:/Users/Lukas/Documents/AI Projects/sharepoint-mcp"
+      "args": ["tsx", "C:/Users/Lukas/Documents/AI Projects/sharepoint-mcp/src/index.ts"]
     }
   }
 }
 ```
 
-Po uložení reštartuj Claude Code — server sa spustí automaticky pri prvom volaní nástroja.
+> **Pozor:** `cwd` v konfigurácii Claude Desktop nefunguje spoľahlivo — vždy používaj absolútnu cestu v `args`.
+
+Po uložení reštartuj Claude Desktop — server sa spustí automaticky pri prvom volaní nástroja.
 
 > **Tip:** Ak pracuješ na viacerých site collections, stačí na začiatku konverzácie zavolať `set_site` s príslušnou URL. Token sa znovu použije, prehliadač sa neotvorí.
 
