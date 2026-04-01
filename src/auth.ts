@@ -88,13 +88,13 @@ export async function getAccessToken(siteUrl: string): Promise<string> {
       await open(url);
     },
     successTemplate: `
-      <html><body style="font-family:sans-serif;padding:40px;text-align:center">
-        <h2>✓ Prihlásenie úspešné!</h2>
-        <p>Môžeš zatvoriť tento tab a vrátiť sa do terminálu.</p>
+      <html><head><meta charset="utf-8"></head><body style="font-family:sans-serif;padding:40px;text-align:center">
+        <h2>&#10003; Authentication successful!</h2>
+        <p>You can close this tab and return to the terminal.</p>
       </body></html>`,
     errorTemplate: `
-      <html><body style="font-family:sans-serif;padding:40px;text-align:center">
-        <h2>✗ Prihlásenie zlyhalo</h2><p>{errorMessage}</p>
+      <html><head><meta charset="utf-8"></head><body style="font-family:sans-serif;padding:40px;text-align:center">
+        <h2>&#10007; Authentication failed</h2><p>{errorMessage}</p>
       </body></html>`,
   });
 

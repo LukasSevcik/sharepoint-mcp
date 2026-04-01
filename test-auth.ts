@@ -15,3 +15,4 @@ try {
 
 // z terminalu zavolat
 //npx tsx test-auth.ts
+//npx tsx test-auth.ts https://contoso.sharepoint.com/sites/x
